@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -31,10 +32,28 @@ namespace Steer73.FormsApp.Tests.ViewModels
             userService.VerifyAll();
         }
 
+
         [Test]
         public async Task InitializeShowErrorMessageOnFetchingError()
         {
-            // ?
+            var userService = new Mock<IUserService>();
+            var messageService = new Mock<IMessageService>();
+
+            var viewModel = new UsersViewModel(
+                userService.Object,
+                messageService.Object);
+
+            //Inititalise a null Users list to make the initialize method to throw and exception
+            IEnumerable<User> Users = null;
+
+            userService.Setup(o => o.GetUsers()).Returns(Task.FromResult(Users)).Verifiable();
+
+            messageService.Setup(x => x.ShowError(It.IsAny<string>())).Verifiable();
+
+            await viewModel.Initialize();
+
+            messageService.VerifyAll();
+
         }
     }
 }

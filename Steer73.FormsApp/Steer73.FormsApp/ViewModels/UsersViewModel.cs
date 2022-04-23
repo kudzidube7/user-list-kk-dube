@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Steer73.FormsApp.Framework;
 using Steer73.FormsApp.Model;
+using Xamarin.Forms;
 
 namespace Steer73.FormsApp.ViewModels
 {
@@ -10,6 +13,10 @@ namespace Steer73.FormsApp.ViewModels
     {
         private readonly IUserService _userService;
         private readonly IMessageService _messageService;
+
+        public UsersViewModel()
+        {
+        }
 
         public UsersViewModel(
             IUserService userService,
@@ -31,6 +38,7 @@ namespace Steer73.FormsApp.ViewModels
                 {
                     Users.Add(user);
                 }
+
             }
             catch (Exception ex)
             {
@@ -42,8 +50,12 @@ namespace Steer73.FormsApp.ViewModels
             }
         }
 
-        public bool IsBusy { get; set; }
-
-        public ICollection<User> Users { get; } = new List<User>();
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+        public ObservableCollection<User> Users { get; } = new ObservableCollection<User>();
     }
 }

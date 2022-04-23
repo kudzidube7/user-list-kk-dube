@@ -2,7 +2,66 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:Steer73.FormsApp.ViewModels;assembly=Steer73.FormsApp"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="UsersLists"
+    BackgroundColor="#1f1e1f"
     x:Class="Steer73.FormsApp.Views.UsersView">
+    <ContentPage.BindingContext>
+        <viewModels:UsersViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout BackgroundColor="#636163" Margin="0" Spacing="0">
+                <Label Margin="20" HorizontalOptions="CenterAndExpand" FontSize="Large" Text="Online Contacts " TextColor="#fff" />
+            </StackLayout>
+            
+            <!--Full page Loading Indicator section-->
+            <StackLayout  IsVisible="{Binding IsBusy}" 
+                          BackgroundColor="LightGray" Grid.Row="0" Grid.Column="0" 
+                          Grid.RowSpan="3" 
+                          VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand">
+                
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+                    <Label Text="Fetching users please be patient ... "/>
+                </StackLayout>
+            </StackLayout>
+
+            <!--Full page Loading Indicator section-->
+            <CollectionView  ItemsSource="{Binding Users}" Margin="20" Grid.Row="1"  >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal" >
+                                <xct:AvatarView Text="{Binding Initials}" Size="60"/>
+
+                                <StackLayout Orientation="Horizontal" Spacing="5" >
+                                    <Label Text="{Binding FirstName}" VerticalOptions="Center" Margin="10,0,0,0" FontSize="Large" TextColor="#fff"/>
+                                    <Label Text="{Binding LastName}" VerticalOptions="Center" FontSize="Large" TextColor="#fff"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <BoxView BackgroundColor="#636163" HeightRequest="1.5" Margin="80,0,10,0"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>
