@@ -32,7 +32,6 @@ namespace Steer73.FormsApp.Tests.ViewModels
             userService.VerifyAll();
         }
 
-
         [Test]
         public async Task InitializeShowErrorMessageOnFetchingError()
         {
