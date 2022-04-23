@@ -5,8 +5,10 @@
     xmlns:viewModels="clr-namespace:Steer73.FormsApp.ViewModels;assembly=Steer73.FormsApp"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Name="UsersLists"
+    NavigationPage.HasNavigationBar="False"
     BackgroundColor="#1f1e1f"
     x:Class="Steer73.FormsApp.Views.UsersView">
+    
     <ContentPage.BindingContext>
         <viewModels:UsersViewModel/>
     </ContentPage.BindingContext>
@@ -22,20 +24,23 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackLayout BackgroundColor="#636163" Margin="0" Spacing="0">
-                <Label Margin="20" HorizontalOptions="CenterAndExpand" FontSize="Large" Text="Online Contacts " TextColor="#fff" />
+            <StackLayout BackgroundColor="#181b1c" Margin="0" Spacing="0">
+                <Label Margin="20" HorizontalOptions="CenterAndExpand" 
+                       FontSize="Large" 
+                       Text="Online Users " 
+                       FontAttributes="Bold" TextColor="#fff" />
             </StackLayout>
             
             <!--Full page Loading Indicator section-->
             <StackLayout  IsVisible="{Binding IsBusy}" 
-                          BackgroundColor="LightGray" Grid.Row="0" Grid.Column="0" 
+                          BackgroundColor="#e6ebed"  Grid.Row="0" Grid.Column="0" 
                           Grid.RowSpan="3" 
                           VerticalOptions="FillAndExpand" 
                           HorizontalOptions="FillAndExpand">
                 
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <ActivityIndicator IsRunning="{Binding IsBusy}"/>
-                    <Label Text="Fetching users please be patient ... "/>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="#000" Scale="1"/>
+                    <Label Text="Fetching online users please be patient ... " TextColor="#000"/>
                 </StackLayout>
             </StackLayout>
 
@@ -54,6 +59,7 @@
                                     <Label Text="{Binding FirstName}" VerticalOptions="Center" Margin="10,0,0,0" FontSize="Large" TextColor="#fff"/>
                                     <Label Text="{Binding LastName}" VerticalOptions="Center" FontSize="Large" TextColor="#fff"/>
                                 </StackLayout>
+                                
                             </StackLayout>
                             <BoxView BackgroundColor="#636163" HeightRequest="1.5" Margin="80,0,10,0"/>
                         </StackLayout>

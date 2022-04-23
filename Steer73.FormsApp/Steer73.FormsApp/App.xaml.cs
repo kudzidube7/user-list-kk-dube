@@ -9,7 +9,7 @@ namespace Steer73.FormsApp
         {
             InitializeComponent();
 
-            MainPage = new UsersView();
+            MainPage = new NavigationPage(new SplashScreen());
         }
     }
 }

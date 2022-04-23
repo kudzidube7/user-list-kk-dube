@@ -16,7 +16,7 @@ namespace Steer73.FormsApp.Model
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            await Task.Delay(1000);
+            await Task.Delay(1500);
 
             return await Task.FromResult(Users);
         }
